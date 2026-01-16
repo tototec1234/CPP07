@@ -1,9 +1,8 @@
-NAME = bureaucrat_test
+NAME =  Start_with_a_few_functions
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -MMD -MP
 
 SRCS = main.cpp \
-	Bureaucrat.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 DEPS = $(SRCS:.cpp=.d)

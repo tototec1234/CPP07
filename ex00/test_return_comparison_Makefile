@@ -1,0 +1,31 @@
+CXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+
+TARGET1 = test_return_comparison
+SRC1 = test_return_comparison.cpp
+
+TARGET2 = test_max_comparison
+SRC2 = test_max_comparison.cpp
+
+all: $(TARGET1) $(TARGET2)
+
+$(TARGET1): $(SRC1)
+	$(CXX) $(CXXFLAGS) -o $(TARGET1) $(SRC1)
+
+$(TARGET2): $(SRC2)
+	$(CXX) $(CXXFLAGS) -o $(TARGET2) $(SRC2)
+
+clean:
+	rm -f $(TARGET1) $(TARGET2)
+
+fclean: clean
+
+re: fclean all
+
+run1: $(TARGET1)
+	./$(TARGET1)
+
+run2: $(TARGET2)
+	./$(TARGET2)
+
+.PHONY: all clean fclean re run1 run2
