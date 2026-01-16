@@ -1,9 +1,8 @@
-NAME = bureaucrat_test
+NAME = iter_test
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -MMD -MP
 
-SRCS = main.cpp \
-	Bureaucrat.cpp
+SRCS = main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 DEPS = $(SRCS:.cpp=.d)
