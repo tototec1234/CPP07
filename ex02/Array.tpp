@@ -1,116 +1,102 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
+/*   Array.tpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: toruinoue <toruinoue@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/11 19:48:18 by torinoue          #+#    #+#             */
-/*   Updated: 2026/01/07 23:43:30 by toruinoue        ###   ########.fr       */
+/*   Created: 2026/01/16 19:06:41 by toruinoue         #+#    #+#             */
+/*   Updated: 2026/01/16 19:15:27 by toruinoue        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bureaucrat.hpp"
-#include "AnsiColor.hpp"
-#include <sstream>
+#include "Array.hpp"
 
-Bureaucrat::Bureaucrat()
-	: _name("default"), _grade(LowestGrade) {
-	std::cout << GREEN_COLOR << "Bureaucrat default constructor called" << RESET_COLOR << std::endl;
+// デフォルトコンストラクタ：空配列を作成
+template< typename T >
+Array<T>::Array() : _array(NULL), _size(0){
+	std::error << "Default Constructor called: Created empty Array of size 0" << std::endl;
+	// 空配列の場合はnew[]を呼ばない（new T[0]は未定義動作の可能性がある）
 }
 
-Bureaucrat::Bureaucrat(const std::string &name, int grade)
-	: _name(name), _grade(grade) {
-	if (grade < HighestGrade)
-		throw GradeTooHighException();
-	if (grade > LowestGrade)
-		throw GradeTooLowException();
-	std::cout << GREEN_COLOR << "Bureaucrat created: " << _name 
-		<< " (grade " << _grade << ")" << RESET_COLOR << std::endl;
-}
-
-Bureaucrat::Bureaucrat(const Bureaucrat& other)
-	: _name(other._name), _grade(other._grade) {
-	std::cout << GREEN_COLOR << "Bureaucrat copy constructor called" << RESET_COLOR << std::endl;
-}
-
-Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other) {
-	if (this != &other) {
-		_grade = other._grade;
+// サイズ指定コンストラクタ：指定サイズの配列を作成
+template< typename T >
+Array<T>::Array(unsigned int size) : _array(NULL), _size(size){
+	if (this->_size > 0)
+	{
+		this->_array = new T[this->_size];
+		// T()で安全で予測可能な初期化
+		// Tがintなら0、charなら'\0'、stringなら空文字列...というように初期化される
+		for (unsigned int i = 0; i < this->_size; i++)
+			this->_array[i] = T();
 	}
-	return *this;
 }
 
-Bureaucrat::~Bureaucrat() {
-	std::cout << RED_COLOR << "Bureaucrat destroyed: " << _name << RESET_COLOR << std::endl;
-}
-
-const std::string& Bureaucrat::getName() const {
-	return _name;
-}
-
-int Bureaucrat::getGrade() const {
-	return _grade;
-}
-
-void Bureaucrat::incrementGrade() {
-	if (_grade <= HighestGrade)
-		throw GradeTooHighException();
-	_grade--;
-	std::cout << GREEN_COLOR << "Bureaucrat grade incremented: " << _name 
-		<< " (grade " << _grade << ")" << RESET_COLOR << std::endl;
-}
-
-void Bureaucrat::decrementGrade() {
-	if (_grade >= LowestGrade)
-		throw GradeTooLowException();
-	_grade++;
-	std::cout << GREEN_COLOR << "Bureaucrat grade decremented: " << _name 
-		<< " (grade " << _grade << ")" << RESET_COLOR << std::endl;
-}
-
-const char* Bureaucrat::GradeTooHighException::what() const throw() {
-	static std::string message;
-	if (message.empty()) {
-		std::ostringstream oss;
-		oss << "Grade is too high (must be >= " << Bureaucrat::HighestGrade << ")";
-		message = oss.str();
+// コピーコンストラクタ：既存の配列をコピーして新しい配列を作成
+template< typename T >
+Array<T>::Array(const Array &src) : _array(NULL), _size(src._size){
+	if (this->_size > 0)
+	{
+		this->_array = new T[this->_size];
+		for (unsigned int i = 0; i < this->_size; i++)
+			this->_array[i] = src._array[i];
 	}
-	return message.c_str();
 }
 
-const char* Bureaucrat::GradeTooLowException::what() const throw() {
-	static std::string message;
-	if (message.empty()) {
-		std::ostringstream oss;
-		oss << "Grade is too low (must be <= " << Bureaucrat::LowestGrade << ")";
-		message = oss.str();
+// デストラクタ
+template< typename T >
+Array<T>::~Array(){
+	if (this->_array != NULL)
+		delete[] this->_array;
+}
+
+// 代入演算子：既存配列に別の配列の内容を代入
+template< typename T >
+Array<T>& Array<T>::operator=(const Array &src){
+	if (this == &src)
+		return (*this);
+	
+	if (this->_array != NULL)
+		delete[] this->_array;
+	
+	this->_size = src._size;
+	
+	if (this->_size > 0)
+	{
+		this->_array = new T[this->_size];
+		for (unsigned int i = 0; i < this->_size; i++)
+			this->_array[i] = src._array[i];
 	}
-	return message.c_str();
+	else
+		this->_array = NULL;
+	
+	return (*this);
 }
 
-std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat) {
-	os << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << ".";
-	return os;
+// 添字演算子（非const版）：配列要素への読み書きアクセス
+template< typename T >
+T& Array<T>::operator[](unsigned int index){
+	if (index >= this->_size)
+		throw InvalidIndexException();
+	return this->_array[index];
 }
 
-/*
-https://cplusplus.com/reference/exception/exception/
-*/
+// 添字演算子（const版）：配列要素への読み取り専用アクセス
+template< typename T >
+const T& Array<T>::operator[](unsigned int index) const{
+	if (index >= this->_size)
+		throw InvalidIndexException();
+	return this->_array[index];
+}
 
-/*
-Please note that exception classes do not have to be designed in
-Orthodox Canonical Form. However, every other class must follow it.
-*/
+// 配列内の要素数を返すメンバー関数
+template< typename T >
+unsigned int Array<T>::size() const{
+	return (this->_size);
+}
 
-/*
-First, start with the smallest cog in this vast bureaucratic machine: the Bureaucrat.
-A Bureaucrat must have:
-•A constant name.
-•A grade that ranges from 1 (highest possible grade) to 150 (lowest possible grade).
-Any attempt to instantiate a Bureaucrat with an invalid grade must throw an excep-
-tion:
-either a Bureaucrat::GradeTooHighException or a Bureaucrat::GradeTooLowException.
-
-*/
-
+// 不正なインデックスアクセス時の例外
+template< typename T >
+const char* Array<T>::InvalidIndexException::what() const throw(){
+	return ("Error: Invalid index");
+}
