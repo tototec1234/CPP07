@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: toruinoue <toruinoue@student.42.fr>        +#+  +:+       +#+        */
+/*   By: torinoue <torinoue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 22:00:00 by torinoue          #+#    #+#             */
-/*   Updated: 2026/01/16 15:39:59 by toruinoue        ###   ########.fr       */
+/*   Updated: 2026/01/17 16:43:19 by torinoue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ int main(void) {
 		std::cout << YELLOW_COLOR << "選択してください: " << RESET_COLOR;
 		std::getline(std::cin, choice);
 
+		if (std::cin.eof()) {
+				std::cout << "\nEOF detected. Exiting... / EOFが検出されました。終了します..." << std::endl;
+				break;
+		}
+	
 		if (choice.empty()) {
 			std::cout << RED_COLOR << "無効な選択です。もう一度入力してください。" << RESET_COLOR << std::endl;
 			continue;
