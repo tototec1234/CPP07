@@ -6,7 +6,7 @@
 /*   By: toruinoue <toruinoue@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 19:48:18 by torinoue          #+#    #+#             */
-/*   Updated: 2026/01/16 19:31:30 by toruinoue        ###   ########.fr       */
+/*   Updated: 2026/01/17 13:09:36 by toruinoue        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,18 @@ Array<T>::Array(unsigned int size) : _array(NULL), _size(size)
 	}
 //	std::cout << "Constructor (Array(unsigned int size)) called.\n_size:" << this->_size << "\n" << std::endl;
 }
+
+/*
+// ⚠️ 注意: C++11以降では有効だが、C++98では不可
+Array<T>::Array(unsigned int size) : _array(NULL), _size(size)
+{
+    if (this->_size > 0)
+    {
+        this->_array = new T[this->_size]();  // カッコで値初期化
+        // ループ不要（全要素が自動的に値初期化される）
+    }
+}
+*/
 
 // コピーコンストラクタ：既存の配列をコピーして新しい配列を作成
 template< typename T >
