@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Array.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: toruinoue <toruinoue@student.42.fr>        +#+  +:+       +#+        */
+/*   By: torinoue <torinoue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 19:06:41 by toruinoue         #+#    #+#             */
-/*   Updated: 2026/01/16 19:27:20 by toruinoue        ###   ########.fr       */
+/*   Updated: 2026/01/17 19:53:50 by torinoue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <iostream>
 # include <exception>
 
-template< typename T >
+template< class T >
 class Array
 {
 	private:

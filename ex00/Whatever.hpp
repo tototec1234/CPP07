@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Whatever.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: toruinoue <toruinoue@student.42.fr>        +#+  +:+       +#+        */
+/*   By: torinoue <torinoue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 19:48:18 by torinoue          #+#    #+#             */
-/*   Updated: 2026/01/16 15:29:13 by toruinoue        ###   ########.fr       */
+/*   Updated: 2026/01/17 19:53:16 by torinoue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #ifndef WHTEVER_HPP
 # define WHTEVER_HPP
 
-template <typename T>
+template <class T>
 void swap(T &first, T &second){
 	T tmp = first;
 	first = second;

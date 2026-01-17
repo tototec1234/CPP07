@@ -6,7 +6,7 @@
 /*   By: torinoue <torinoue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 22:00:00 by torinoue          #+#    #+#             */
-/*   Updated: 2026/01/17 16:43:19 by torinoue         ###   ########.fr       */
+/*   Updated: 2026/01/17 20:09:14 by torinoue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void printMenu(void) {
 void testSubjectPDF(void) {
 	int a = 2;
 	int b = 3;
-	::swap(a, b);
+	swap(a, b);
 	std::cout << "a = " << a << ", b = " << b << std::endl;
 	std::cout << "min(a, b) = " << ::min(a, b) << std::endl;
 	std::cout << "max(a, b) = " << ::max(a, b) << std::endl;

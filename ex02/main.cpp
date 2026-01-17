@@ -6,7 +6,7 @@
 /*   By: torinoue <torinoue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 22:00:00 by torinoue          #+#    #+#             */
-/*   Updated: 2026/01/17 16:44:14 by torinoue         ###   ########.fr       */
+/*   Updated: 2026/01/17 20:42:28 by torinoue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void testSubscriptOperator(void);
 void testExceptionHandling(void);
 void testSizeFunction(void);
 void testDifferentTypes(void);
-void testIntegratedTests236(void);
+void testIntegratedTests(void);
 void testValueInitialization(void);
 
 int main(void) {
@@ -78,7 +78,7 @@ int main(void) {
 				testDifferentTypes();
 				break;
 			case '9':
-				testIntegratedTests236();
+				testIntegratedTests();
 				break;
 			case 'a':
 			case 'A':
@@ -462,7 +462,7 @@ void testDifferentTypes(void) {
 	std::cout << CYAN_COLOR << "string配列: " << strings[0] << ", " << strings[1] << RESET_COLOR << std::endl;
 }
 
-void testIntegratedTests236(void) {
+void testIntegratedTests(void) {
 	std::cout << "\n" << GREEN_COLOR << "=== テスト 9: テスト2（パラメータ付きコンストラクタ）・テスト3（コピーコンストラクタ）・テスト6（例外処理）の結合テスト ===" << RESET_COLOR << std::endl;
 	
 	const unsigned int MAX_VAL = 10;
@@ -477,7 +477,7 @@ void testIntegratedTests236(void) {
 		std::cout << "  mirror[" << i << "] = " << mirror[i] << std::endl;
 		// 注意: 未定義値のため、ランダムな値が表示される可能性がある
 	}
-/*	
+    
 	// 値初期化の場合（テスト用）:
 	int* mirror_value = new int[MAX_VAL]();  // 各要素は0で初期化される
 	std::cout << "new int[MAX_VAL]() (値初期化) の各要素:" << std::endl;
@@ -486,7 +486,7 @@ void testIntegratedTests236(void) {
 		// すべて0になることが確認できる
 	}
 	delete[] mirror_value;
-*/
+
 	
 	srand(time(NULL));
 	// 上記のコメントアウトされたテストでは、
@@ -610,6 +610,7 @@ void testValueInitialization(void) {
 	std::cout << std::endl;
 	
 	Array<int> test_array(5);
+    // int  test_array[5];
 	bool array_all_zero = true;
 	std::cout << "Array<int> test_array(5); の各要素:" << std::endl;
 	for (unsigned int i = 0; i < test_array.size(); i++) {

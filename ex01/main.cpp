@@ -6,7 +6,7 @@
 /*   By: torinoue <torinoue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 22:00:00 by torinoue          #+#    #+#             */
-/*   Updated: 2026/01/17 16:44:07 by torinoue         ###   ########.fr       */
+/*   Updated: 2026/01/17 19:43:10 by torinoue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void increment_int(int &value){	value++;}
 
 // const参照を受け取る関数（読み取り専用）
 void print_int(const int &value){	std::cout << value << " ";}
+関数名がわかりにくい　constつけるとよい
+
 
 // 値渡しで受け取る関数
 void print_int_by_value(int value){	std::cout << value << " ";}
@@ -143,6 +145,7 @@ void printMenu(void) {
 	std::cout << "  " << RED_COLOR << "0" << RESET_COLOR << ". 終了" << std::endl;
 	std::cout << BOLD_BLUE_COLOR << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << RESET_COLOR << std::endl;
 }
+/* ************************************************************************** */
 
 void testNonConstIntArray(void) {
 	std::cout << "\n" << GREEN_COLOR << "=== テスト 1: 非const配列のテスト (int型、変更操作) ===" << RESET_COLOR << std::endl;
@@ -163,7 +166,8 @@ void testNonConstIntArray(void) {
 	
 	std::cout << GREEN_COLOR << "✓ 非const配列での変更操作が正常に動作しました" << RESET_COLOR << std::endl;
 }
-
+/* ************************************************************************** */
+で区切る
 void testConstIntArray(void) {
 	std::cout << "\n" << GREEN_COLOR << "=== テスト 2: const配列のテスト (int型、読み取り専用) ===" << RESET_COLOR << std::endl;
 	
@@ -176,7 +180,7 @@ void testConstIntArray(void) {
 	
 	std::cout << CYAN_COLOR << "const配列は読み取り専用です（変更操作はコンパイルエラーになります）" << RESET_COLOR << std::endl;
 	std::cout << GREEN_COLOR << "✓ const配列用のオーバーロードが正常に動作しました" << RESET_COLOR << std::endl;
-	
+	順番がおかしい！
 	// std::cout << "const配列にincrement_int関数を適用（各要素を+1）... ";
 	// ::iter(const_array, const_size, increment_int);
 	// std::cout << std::endl;

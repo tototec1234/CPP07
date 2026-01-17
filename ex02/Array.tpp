@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Array.tpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: toruinoue <toruinoue@student.42.fr>        +#+  +:+       +#+        */
+/*   By: torinoue <torinoue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 19:48:18 by torinoue          #+#    #+#             */
-/*   Updated: 2026/01/17 13:09:36 by toruinoue        ###   ########.fr       */
+/*   Updated: 2026/01/17 20:45:56 by torinoue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ Array<T>::Array(unsigned int size) : _array(NULL), _size(size)
 {
 	if (this->_size > 0)
 	{
-		this->_array = new T[this->_size];
+		this->_array = new T[this->_size]();
+		// this->_array = new T[this->_size];
 		// T()で安全で予測可能な初期化
 		// Tがintなら0、charなら'\0'、stringなら空文字列...というように初期化される
-		for (unsigned int i = 0; i < this->_size; i++)
-			this->_array[i] = T();
+		// for (unsigned int i = 0; i < this->_size; i++)
+		// 	this->_array[i] = T();
 	}
 //	std::cout << "Constructor (Array(unsigned int size)) called.\n_size:" << this->_size << "\n" << std::endl;
 }
